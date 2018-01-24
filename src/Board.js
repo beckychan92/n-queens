@@ -79,11 +79,34 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
+      var row = this.attributes[rowIndex];
+      var count = 0;
+      for(var i = 0; i < row.length; i++) {
+        if(row[i] !== 0) {
+          count++;
+          if(count > 1) {
+            return true;
+          }
+        }
+
+      }
       return false; // fixme
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
+      var obj = this.attributes;
+      for(var key in obj) {
+      var count = 0;
+        for(var i = 0; i < obj[key].length; i++) {
+          if(obj[key][i] !== 0) {
+            count++;
+          }
+          if(count > 1) {
+            return true;
+          }
+        }
+      }
       return false; // fixme
     },
 
@@ -94,15 +117,35 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
+      var obj = this.attributes;
+      var count = 0;
+      for(var key in obj) {
+        if(obj[key][colIndex] !== 0) {
+          count++;
+        }
+        if(count > 1) {
+          return true;
+        }
+      }
       return false; // fixme
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+      var obj = this.attributes;
+      for(var i = 0; i < obj[0].length; i++) {
+        var count = 0;
+        for(var key in obj) {
+          if(obj[key][i]) {
+            count++;
+          } 
+        }
+        if(count > 1) {
+          return true;
+        }
+      }
       return false; // fixme
     },
-
-
 
     // Major Diagonals - go from top-left to bottom-right
     // --------------------------------------------------------------
